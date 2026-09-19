@@ -1,0 +1,6 @@
+full_name,gender,email,phone,national_id_primary,national_id_secondary,bank_name,account_number,account_name,ward,trade_area
+Bala Yusuf,Male,balayusuf.demo@example.com,08011122233,11122233344,99988877766,Demo Bank,1234567890,Bala Yusuf,North Ward,Tailoring
+Hauwa Ibrahim,Female,hauwa.demo@example.com,08022233344,22233344455,88877766655,Sample Bank,2345678901,Hauwa Ibrahim,South Ward,Catering
+Musa Adamu,Male,,08033344455,33344455566,77766655544,Demo Bank,3456789012,Musa Adamu,East Ward,Welding
+Amina Lawal,Female,amina.demo@example.com,0804445566,44455566677,66655544433,Sample Bank,4567890123,Amina Lawal,West Ward,Hairdressing
+Sani Bello,Male,sani.demo@example.com,08055566677,5556667778,55544433322,Demo Bank,5678901234,Sani Bello,North Ward,Carpentry
