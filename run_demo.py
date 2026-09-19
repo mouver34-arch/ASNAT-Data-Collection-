@@ -15,17 +15,17 @@ Run:
     python run_demo.py
 """
 
-from src.pipeline import RegistryPipeline, FieldMap
+from pipeline import RegistryPipeline, FieldMap
 
 pipeline = RegistryPipeline(id_field="national_id_secondary")
 
 pipeline.load_csv(
-    "sample_data/online_form_responses.csv",
+    "online_form_responses.csv",
     source="online_form",
 )
 
 pipeline.load_csv(
-    "sample_data/paper_form_batch1.csv",
+    "paper_form_batch1.csv",
     source="paper_batch_1",
     field_map=FieldMap(sector="trade_area", trade_area="sector"),
 )
