@@ -6,7 +6,7 @@ validated register — built for a real government artisan-empowerment
 program that registered ~600 beneficiaries through both an online form
 and paper forms filled by field enumerators across several locations.
 
-**No real data is in this repository.** `sample_data/` is entirely
+**No real data is in this repository.** The sample CSVs are entirely
 fabricated (fake names, fake IDs) to demonstrate the pipeline safely.
 See [Note on the original project](#note-on-the-original-project) below.
 
@@ -44,12 +44,6 @@ channels, you reliably run into:
   ready for a human reviewer to work through.
 
 ## Usage
-
-```bash
-pip install -r requirements.txt
-python run_demo.py
-```
-
 This runs the pipeline against the bundled synthetic sample data and
 writes `output/demo_register.docx`. The sample data deliberately
 includes a true duplicate, a conflicting-duplicate-shaped record, two
@@ -57,7 +51,7 @@ malformed ID fields, and a swapped-column source — so the demo output
 shows every feature of the pipeline firing.
 
 ```python
-from src.pipeline import RegistryPipeline, FieldMap
+from pipeline import RegistryPipeline, FieldMap
 
 pipeline = RegistryPipeline(id_field="national_id_secondary")
 pipeline.load_csv("your_online_export.csv", source="online")
@@ -70,30 +64,3 @@ pipeline.load_docx_table(
 result = pipeline.reconcile()
 print(result.summary())
 result.to_docx("output/final_register.docx", title="Beneficiary Register")
-```
-
-## Design choices worth calling out
-
-- **Conservative auto-resolution.** The pipeline only collapses records
-  automatically when it's unambiguous. Everything else is surfaced, not
-  guessed at — appropriate for data tied to real disbursements.
-- **Flags, not deletions.** A flagged row still makes it into the
-  output. The reviewer decides what to do with it; the pipeline's job is
-  to make sure nothing questionable slips through unnoticed.
-- **Configurable field mapping**, because in practice every new data
-  source has its own quirks, and hardcoding column names doesn't survive
-  contact with a second source.
-
-## Note on the original project
-
-This was built to reconcile ~600 real beneficiary registrations (online
-form + 10 paper registers) for an artisan equipment-leasing program in
-Jigawa State, Nigeria. That register contains real national ID numbers,
-bank details, and phone numbers for real people, so — obviously — it
-isn't here. This repo is the generalized, reusable core of that
-pipeline, exercised against fabricated data.
-
-## Stack
-
-Python 3.10+, `python-docx`. No external services, no API keys, runs
-fully offline.
